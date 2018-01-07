@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?><project-modules id="moduleCoreId" project-version="1.5.0">
+    <wb-module deploy-name="skd.springMvc">
+        <wb-resource deploy-path="/" source-path="/WebContent" tag="defaultRootSource"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/commom"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/config"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/users"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/system"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/head"/>
+        <wb-resource deploy-path="/WEB-INF/classes" source-path="/back"/>
+        <property name="context-root" value="skd.springMvc"/>
+        <property name="java-output-path" value="/skd.springMvc/build/classes"/>
+    </wb-module>
+</project-modules>

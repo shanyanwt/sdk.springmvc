@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration>
+	<Appenders>
+		<console name="STDOUT" target="SYSTEM_OUT">
+			<PatternLayout pattern="%d [%t] %-5p %C{6} (%F:%L) - %m%n"/>
+		</console>
+	</Appenders>
+
+	<Loggers>
+		<logger name="com.opensymphony.xwork2" level="info"/>
+		<logger name="org.apache.struts2" level="info"/>
+		<logger name="org.demo.rest" level="debug"/>
+		
+		<!-- log的级别级别越低打印的信息越多
+		trace:1
+		debug:2
+		info:3
+		warn:4
+		error:5
+		  -->
+		<Root level="debug">
+			  <AppenderRef ref="STDOUT" />
+		 </Root>
+	</Loggers>
+</Configuration> 

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+  <configuration>
+  	<!--mybatis和spring整合之后 ，数据源不需要了
+  		原因：是使用spring的数据源
+  	  -->
+  	  <!--映射文件Mapper也不需要  原因同上  -->
+  </configuration>

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:mvc="http://www.springframework.org/schema/mvc"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:context="http://www.springframework.org/schema/context"
+     xmlns:tx="http://www.springframework.org/schema/tx"
+     xmlns:aop="http://www.springframework.org/schema/aop"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/tx
+        http://www.springframework.org/schema/tx/spring-tx.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd
+         http://www.springframework.org/schema/aop
+        http://www.springframework.org/schema/aop/spring-aop.xsd"
+       default-autowire="byName"
+       >    
+       <!-- 使用context扫描注解 -->
+       <context:component-scan base-package="com.skd"/>
+
+       <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+			<!--驱动  -->
+			<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+			<!-- url -->
+			<property name="url" value="jdbc:mysql://locdlhost:3306/db_skd"/>
+			<!-- 用户名user -->
+			<property name="username" value="root"/>
+			<!-- 密码 -->
+			<property name="password" value="123456"/>
+		</bean> 
+      		<!--spring &&Mybatis整合
+		告诉classpath:的路径，编译后的路径
+		  -->
+		<bean id="sqlSessionFB" class="org.mybatis.spring.SqlSessionFactoryBean">
+			<!-- configLocation:resource:填写value类型 -->
+			<property name="configLocation" value="classpath:mybatis.config.xml"></property>
+			
+			<!--当返回值 Resource[]可以使用
+			通配符初始化配置文件 -->
+				<property name="mapperLocations" value="classpath:com/skd/*/pojo/*Mapper.xml"/>
+			
+			<!--如果两个名称一样可以省略用自动装配  
+			  配置  default-autowire="byName"
+			  报错Injection of resource dependencies failed; nested exception is
+			-->
+			<!-- <property name="dataSource" ref="dataSource"></property> -->
+		</bean>
+		
+		<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+			<!--在这里包里dao接口并创建代理类
+				底层session.getMapper();
+			  -->
+			<property name="basePackage" value="com.skd"/>
+		</bean>
+		
+         <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+         	<!-- 前缀  -->
+         	<property name="prefix" value="/WEB-INF/jsp/"/>
+         	<!-- 后缀  -->
+         	<property name="suffix" value=".jsp"/>
+         </bean>
+         <!--jackson-core：配置  -->
+        <mvc:annotation-driven>
+        	<mvc:message-converters>
+				<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter"></bean>
+        	</mvc:message-converters>
+        </mvc:annotation-driven>
+		<!-- 事务处理器，防止错误执行sql -->
+		<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+			<property name="dataSource" ref="dataSource"/>
+		</bean>
+		<!-- 事物管理器的通知类
+			定义那些方法开启事物
+		 -->
+		<tx:advice id="txAdvice" transaction-manager="transactionManager">
+			<tx:attributes>
+			<!-- propagation:传播特性，service之间的调用是否各用个的？还是公用一个
+				rollback-for：默认抛出runtimeException,才会回滚
+				http://www.cnblogs.com/yangy608/archive/2011/06/29/2093478.html
+			 -->
+				<tx:method name="save*" propagation="REQUIRED" rollback-for="Exception"/>
+				<tx:method name="update*" propagation="REQUIRED" rollback-for="Exception"/>
+				<tx:method name="delete*" propagation="REQUIRED" rollback-for="Exception"/>
+				<!--read-only="true":其他的只读  -->
+				<tx:method name="*" read-only="true"/>
+			</tx:attributes>
+		</tx:advice>
+		<aop:config>
+	        <aop:pointcut id="operation" expression="execution(* com.skd.*.sercie.impl.*.*(..))"/>
+	        <aop:advisor advice-ref="txAdvice" pointcut-ref="operation"/>
+	    </aop:config>
+			
+</beans>

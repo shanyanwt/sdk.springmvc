@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!--3 活动的Dao实现类满足四个条件  -->
+  <mapper namespace="com.skd.user.dao.IAdimsDao">
+  	<!--保存一条数据  自动赋值id  -->
+  	<insert id="save" parameterType="com.skd.user.pojo.AAdims"
+  	useGeneratedKeys="true"  keyProperty="id" keyColumn="id">
+	insert into skd_admin
+	(role_id, email, password, name, phone, qq, sex, content, status, create_time,update_time, last_login_time)
+	values
+	(#{role_id},#{email},#{password},#{name},#{ phone},#{qq},#{sex},#{content},#{status},#{create_time},#{update_time},#{last_login_time})
+  	</insert>
+  	<!--更新一条记录 
+  		也可以更新全部字段，也可更新指定字段
+  	-->
+  	<update id="update" parameterType="com.skd.user.pojo.AAdims">
+  		update skd_admin
+  		<set>
+  			<!-- 判断是否传值
+  				一般引用类型都加上判断
+  				if 中#{}后要加上 ‘,’
+  			 -->
+  			<if test="role_id !=null">
+  				role_id = #{role_id},
+  			</if>
+  			<if test="email !=null">
+  				email = #{email},
+  			</if>
+  			<if test="name !=null">
+  				name = #{name},
+  			</if>
+  			<if test="password !=null">
+  				password = #{password},
+  			</if>
+  			<if test="phone !=null">
+  				phone = #{phone},
+  			</if>
+  			<if test="qq !=null">
+  				qq = #{qq},
+  			</if>
+  			<if test="content !=null">
+  				content = #{content},
+  			</if>
+  			<if test="create_time !=null">
+  				create_time = #{create_time},
+  			</if>
+  			<if test="update_time !=null">
+  				update_time = #{update_time},
+  			</if>
+  			<if test="last_login_time !=null">
+  				last_login_time = #{last_login_time},
+  			</if>
+  			status = #{status},
+  			sex = #{sex},
+  		</set>
+  		<where>
+  			id = #{id}
+  		</where>
+  	</update>
+  	<!--更新多条记录  -->
+  	<update id="updateList" parameterType="map"></update>
+  	<!--删除一条记录  没有返回 -->
+  	<delete id="delete" parameterType="map">
+  		delete from skd_admin
+  		<where>
+  			<choose>
+  				<when test="id !=null">
+  					id = #{id}
+  				</when>
+  				<!-- 如果不写otherwise有可能删除所有的风险 当map不传的时候-->
+  				<otherwise>
+  					id = #{id}
+  				</otherwise>
+  			</choose>
+  		</where>
+  	</delete>
+  	
+  	<!--
+  		id: 必须和dao类名一样
+  		parameterType: 必须和dao方法参数类型一样
+  		resultType：必须和方法中的返回值一样（查询条件），查询多条必须和返回值（list）中的泛型一致
+  	  -->
+  	<select id="findOne" parameterType="map" resultType="com.skd.user.pojo.AAdims">
+  		select * from skd_admin
+  		<where>
+  			<choose>
+  				<when test="id !=null">
+  					id = #{id}
+  				</when>
+  			</choose>
+  		</where>
+  		<!-- 只查询一条 -->
+  		limit 1;
+  	</select>
+  
+  </mapper>
