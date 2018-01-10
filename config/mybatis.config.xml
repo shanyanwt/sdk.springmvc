@@ -7,4 +7,16 @@
   		原因：是使用spring的数据源
   	  -->
   	  <!--映射文件Mapper也不需要  原因同上  -->
+  	  
+  	  <settings>
+  	 		 <!-- log 方式打印sql -->
+  	  	<setting name="logImpl" value="LOG4J2" />
+  	  </settings>
+  	  
+  	  <!--分页插件配置  -->
+  	  <plugins>
+  	  	<plugin interceptor="com.github.pagehelper.PageInterceptor">
+  	  		<property name="reasonable" value="true"/>
+  	  	</plugin>
+  	  </plugins>
   </configuration>

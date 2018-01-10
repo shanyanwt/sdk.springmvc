@@ -1,5 +1,6 @@
 package com.skd.user.sercie;
 
+import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSONObject;
@@ -48,4 +49,11 @@ public interface IuserService {
 	 * @return
 	 */
 	AAdims findOneAdimsService(Map<String, Object> condMap);
+
+	/**
+	 * 查询多条记录
+	 * 
+	 * @return
+	 */
+	List<AAdims> findListService();
 }

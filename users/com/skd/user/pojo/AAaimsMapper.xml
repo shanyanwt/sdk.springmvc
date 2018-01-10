@@ -94,5 +94,10 @@
   		<!-- 只查询一条 -->
   		limit 1;
   	</select>
+  	<!--查询多条记录  -->
+  	
+  	<select id="findList" resultType="com.skd.user.pojo.AAdims">
+  		select * from skd_admin
+  	</select>
   
   </mapper>

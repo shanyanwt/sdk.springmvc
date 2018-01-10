@@ -2,6 +2,7 @@ package com.skd.user.test;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -105,9 +106,24 @@ public class UserServicTest extends util {
 	@Test
 	public void deleteOneAimsService() {
 		Map<String, Object> condMap = new HashMap<String, Object>();
-		condMap.put("id", "2");
+		condMap.put("id", "5");
 		JSONObject adims = userService.deleteOneAimsService(condMap);
 		ContstatFinaUtil.LOGGER.info("查询结果：" + adims.toString());
+	}
+
+	/**
+	 * 查询多条 记录
+	 */
+	@Test
+	public void findListService() {
+
+		List<AAdims> adims = userService.findListService();
+		int conte = 0;
+		for (AAdims aAdims : adims) {
+
+			ContstatFinaUtil.LOGGER.info("查询结果：" + conte + aAdims.toString());
+			conte++;
+		}
 	}
 
 }

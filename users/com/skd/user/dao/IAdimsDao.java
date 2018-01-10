@@ -1,5 +1,6 @@
 package com.skd.user.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import com.skd.user.pojo.AAdims;
@@ -56,5 +57,12 @@ public interface IAdimsDao {
 	 * @return
 	 */
 	AAdims findOne(Map<String, Object> condMap);
+
+	/**
+	 * 查询多条记录
+	 * 
+	 * @return
+	 */
+	List<AAdims> findList();
 
 }
