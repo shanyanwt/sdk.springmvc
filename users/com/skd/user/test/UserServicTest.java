@@ -12,6 +12,7 @@ import org.junit.Test;
 import com.alibaba.fastjson.JSONObject;
 import com.sdk.test.util;
 import com.sdk.util.ContstatFinaUtil;
+import com.sdk.util.PageUtil;
 import com.skd.user.pojo.AAdims;
 import com.skd.user.sercie.IuserService;
 
@@ -116,14 +117,28 @@ public class UserServicTest extends util {
 	 */
 	@Test
 	public void findListService() {
+		// 搜索功能
+		Map<String, Object> condMap = new HashMap<String, Object>();
+		condMap.put("keyword", "18");
+		/*
+		 * condMap.put("status", "1"); condMap.put("seDtate", new Date());
+		 * condMap.put("edDtate", new Date());
+		 */
 
-		List<AAdims> adims = userService.findListService();
+		// 查询所有 不分页 传null
+		/* List<AAdims> adims = userService.findListService(null); */
+
+		PageUtil pageUtil = new PageUtil();
+		// pageUtil.setCurrentPage(1);
+		// pageUtil.setPageSize(20);
+		List<AAdims> adims = userService.findListService(pageUtil, condMap);
 		int conte = 0;
 		for (AAdims aAdims : adims) {
 
 			ContstatFinaUtil.LOGGER.info("查询结果：" + conte + aAdims.toString());
 			conte++;
 		}
+		ContstatFinaUtil.LOGGER.info("分页信息：" + pageUtil);
 	}
 
 }

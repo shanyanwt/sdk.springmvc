@@ -60,9 +60,9 @@ public interface IAdimsDao {
 
 	/**
 	 * 查询多条记录
-	 * 
+	 *
 	 * @return
 	 */
-	List<AAdims> findList();
+	List<AAdims> findList(Map<String, Object> condMap);
 
 }

@@ -96,8 +96,35 @@
   	</select>
   	<!--查询多条记录  -->
   	
-  	<select id="findList" resultType="com.skd.user.pojo.AAdims">
+  	<select id="findList" parameterType="map" resultType="com.skd.user.pojo.AAdims">
   		select * from skd_admin
+  		<!--条件搜索  -->
+  		<where>
+  			<!--关键字索索  -->
+  			<if test="keyword !=null and keyword !=''">
+  				and (email like #{keyword} or qq like #{keyword} or name like #{ keyword} or phone like #{keyword})
+  			</if>
+  			<!--状态  -->
+  			<if test="status !=null">
+  				and status = #{status}
+  			</if>
+  			<!--时间  -->
+  			<if test="stDtate !=null and enDtate !=null">
+  				<![CDATA[
+  					and create_time >= #{stDate} and create_time < #{enDtate}
+  				]]>
+  			</if>
+  		</where>
+  		<!--排序 如果没有排序按照默认排序  -->
+  		<choose>
+  			<when test="orderby == 'creatTimeASC'">
+  				order by creatTime asc
+  			</when>
+  			<otherwise>
+  				order by update_time desc
+  			</otherwise>
+  		</choose>
+  		
   	</select>
   
   </mapper>

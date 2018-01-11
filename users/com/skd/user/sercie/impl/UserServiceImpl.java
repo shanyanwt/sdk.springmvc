@@ -12,6 +12,7 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.sdk.util.PageUtil;
 import com.skd.user.dao.IAdimsDao;
 import com.skd.user.pojo.AAdims;
 import com.skd.user.sercie.IuserService;
@@ -135,10 +136,26 @@ public class UserServiceImpl implements IuserService {
 	 * @see com.skd.user.sercie.IuserService#findListService()
 	 */
 	@Override
-	public List<AAdims> findListService() {
+	public List<AAdims> findListService(PageUtil pageUtil,
+			Map<String, Object> condMap) {
 
-		Page page = PageHelper.startPage(1, 10);
-		return adimsDao.findList();
+		/* 匹配模糊关键字 */
+		if (condMap.get("keyword") != null) {
+			condMap.put("keyword", "%" + condMap.get("keyword") + "%");
+		}
+		/**
+		 * 分页查询
+		 */
+		if (pageUtil != null) {
+			Page page = PageHelper.startPage(pageUtil.getCurrentPage(),
+					pageUtil.getPageSize());
+			List<AAdims> aAdims = adimsDao.findList(condMap);
+			// 建议转为Long 类型 int
+			pageUtil.setToalRecord(Long.valueOf(page.getTotal()).intValue());
+			return aAdims;
+		}
+
+		return adimsDao.findList(condMap);
 	}
 
 }

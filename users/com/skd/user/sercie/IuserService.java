@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.alibaba.fastjson.JSONObject;
+import com.sdk.util.PageUtil;
 import com.skd.user.pojo.AAdims;
 
 /**
@@ -52,8 +53,8 @@ public interface IuserService {
 
 	/**
 	 * 查询多条记录
-	 * 
+	 *
 	 * @return
 	 */
-	List<AAdims> findListService();
+	List<AAdims> findListService(PageUtil pageUtil, Map<String, Object> condMap);
 }

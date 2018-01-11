@@ -32,37 +32,36 @@ public class PageUtil {
 	private int currRecord;
 
 	/**
-	 * @return the toalRecord
+	 * @return 总条数
 	 */
 	public int getToalRecord() {
 		return toalRecord;
 	}
 
 	/**
-	 * @param toalRecord
-	 *            the toalRecord to set
+	 * @param 总条数
 	 */
 	public void setToalRecord(int toalRecord) {
 		this.toalRecord = toalRecord;
 	}
 
 	/**
-	 * @return the pageSize
+	 * @return 每页多少条 默认10条
 	 */
 	public int getPageSize() {
 		return pageSize;
 	}
 
 	/**
-	 * @param pageSize
-	 *            the pageSize to set
+	 * @param 每页多少条
+	 *            默认10条
 	 */
 	public void setPageSize(int pageSize) {
 		this.pageSize = pageSize;
 	}
 
 	/**
-	 * @return the totalPage
+	 * @return 总页数
 	 */
 	public int getTotalPage() {
 
@@ -78,15 +77,14 @@ public class PageUtil {
 	}
 
 	/**
-	 * @param totalPage
-	 *            the totalPage to set
+	 * @param 总页数
 	 */
 	public void setTotalPage(int totalPage) {
 		this.totalPage = totalPage;
 	}
 
 	/**
-	 * @return the currentPage
+	 * @return 当前页
 	 */
 	public int getCurrentPage() {
 		if (this.currentPage < 1) {
@@ -100,15 +98,14 @@ public class PageUtil {
 	}
 
 	/**
-	 * @param currentPage
-	 *            the currentPage to set
+	 * @param 当前页
 	 */
 	public void setCurrentPage(int currentPage) {
 		this.currentPage = currentPage;
 	}
 
 	/**
-	 * @return the prePage
+	 * @return 上一页
 	 */
 	public int getPrePage() {
 		this.prePage = this.getCurrentPage() - 1;
@@ -119,7 +116,7 @@ public class PageUtil {
 	}
 
 	/**
-	 * @return the nextPage
+	 * @return 下一页
 	 */
 	public int getNextPage() {
 		this.nextPage = this.getCurrentPage() + 1;
@@ -140,9 +137,8 @@ public class PageUtil {
 	// 测试
 	public static void main(String[] ager) {
 		PageUtil page = new PageUtil();
-		page.setToalRecord(50);
-		page.setPageSize(10);
-		page.setCurrentPage(1000);
+		page.setToalRecord(51);
+		page.setPageSize(5);
 		System.out.println(page);
 	}
 
