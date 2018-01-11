@@ -138,7 +138,6 @@ public class UserServiceImpl implements IuserService {
 	@Override
 	public List<AAdims> findListService(PageUtil pageUtil,
 			Map<String, Object> condMap) {
-
 		/* 匹配模糊关键字 */
 		if (condMap.get("keyword") != null) {
 			condMap.put("keyword", "%" + condMap.get("keyword") + "%");
@@ -147,6 +146,7 @@ public class UserServiceImpl implements IuserService {
 		 * 分页查询
 		 */
 		if (pageUtil != null) {
+			// 获取工具类的当前页，每页多少条
 			Page page = PageHelper.startPage(pageUtil.getCurrentPage(),
 					pageUtil.getPageSize());
 			List<AAdims> aAdims = adimsDao.findList(condMap);
@@ -154,7 +154,6 @@ public class UserServiceImpl implements IuserService {
 			pageUtil.setToalRecord(Long.valueOf(page.getTotal()).intValue());
 			return aAdims;
 		}
-
 		return adimsDao.findList(condMap);
 	}
 

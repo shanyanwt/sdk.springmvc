@@ -113,7 +113,8 @@ public class UserServicTest extends util {
 	}
 
 	/**
-	 * 查询多条 记录
+	 * 查询多条 管理员 以下几种情况 1：不带条件分页 2：带条件的分页 3：不带条件的不分页 4：带条件的不分页
+	 *
 	 */
 	@Test
 	public void findListService() {

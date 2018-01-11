@@ -100,7 +100,7 @@
   		select * from skd_admin
   		<!--条件搜索  -->
   		<where>
-  			<!--关键字索索  -->
+  			<!--关键字搜索  -->
   			<if test="keyword !=null and keyword !=''">
   				and (email like #{keyword} or qq like #{keyword} or name like #{ keyword} or phone like #{keyword})
   			</if>
