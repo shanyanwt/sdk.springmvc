@@ -6,6 +6,7 @@ import java.util.Map;
 import com.alibaba.fastjson.JSONObject;
 import com.sdk.util.PageUtil;
 import com.skd.user.pojo.AAdims;
+import com.skd.user.pojo.ARole;
 
 /**
  * 4 用户service
@@ -18,6 +19,7 @@ import com.skd.user.pojo.AAdims;
  */
 
 public interface IuserService {
+	/* 管理员 service开始 */
 
 	/**
 	 * 保存一条管理员
@@ -57,4 +59,50 @@ public interface IuserService {
 	 * @return
 	 */
 	List<AAdims> findListService(PageUtil pageUtil, Map<String, Object> condMap);
+	/* 管理员 service结束 */
+
+	/* =======角色 service开始========== */
+
+	/**
+	 * 保存一条角色
+	 *
+	 * @param role
+	 * @return json
+	 *
+	 */
+	JSONObject saveOneARoleService(ARole role);
+
+	/**
+	 * 更新一条记录
+	 *
+	 * @param role
+	 * @return
+	 */
+	JSONObject updateOneARoleService(ARole role);
+
+	/**
+	 * 删除一条记录
+	 *
+	 * @param condMap
+	 * @return
+	 */
+	JSONObject deleteOneARoleService(Map<String, Object> condMap);
+
+	/**
+	 * 查询一条角色
+	 *
+	 * @param condMap
+	 * @return
+	 */
+	ARole findOneARoleService(Map<String, Object> condMap);
+
+	/**
+	 * 查询多条记录
+	 *
+	 * @return
+	 */
+	List<ARole> findARoleListService(PageUtil pageUtil,
+			Map<String, Object> condMap);
+	/* 角色 service结束 */
+
 }

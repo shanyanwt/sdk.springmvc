@@ -14,6 +14,7 @@ import com.sdk.test.util;
 import com.sdk.util.ContstatFinaUtil;
 import com.sdk.util.PageUtil;
 import com.skd.user.pojo.AAdims;
+import com.skd.user.pojo.ARole;
 import com.skd.user.sercie.IuserService;
 
 /**
@@ -140,6 +141,17 @@ public class UserServicTest extends util {
 			conte++;
 		}
 		ContstatFinaUtil.LOGGER.info("分页信息：" + pageUtil);
+	}
+
+	/**
+	 * 查询一条管角色
+	 */
+	@Test
+	public void findOneARoleService() {
+		Map<String, Object> condMap = new HashMap<String, Object>();
+		condMap.put("id", "1");
+		ARole role = userService.findOneARoleService(condMap);
+		ContstatFinaUtil.LOGGER.info("查询结果：" + role.toString());
 	}
 
 }
