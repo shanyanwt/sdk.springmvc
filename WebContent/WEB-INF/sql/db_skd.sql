@@ -3,7 +3,7 @@ Navicat MySQL Data Transfer
 
 Source Server         : al
 Source Server Version : 50720
-Source Host           : 47.95.7.135:3306
+Source Host           : loalhsot:3306
 Source Database       : db_skd
 
 Target Server Type    : MYSQL
