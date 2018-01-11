@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!--3 活动的Dao实现类满足四个条件  -->
+  <mapper namespace="com.skd.user.dao.IAdimsDao">
+  	<!--保存一条数据  自动赋值id  -->
+  	<insert id="save" parameterType="com.skd.user.pojo.ARole"
+  	useGeneratedKeys="true"  keyProperty="id" keyColumn="id">
+	insert into skd_role 
+		(name, content, status, create_time, update_time) 
+	values 
+		({name} # { content} # { status} # { create_time} # { update_time})
+  	</insert>
+  	<!--更新一条记录 
+  		也可以更新全部字段，也可更新指定字段
+  	-->
+  	<update id="update" parameterType="com.skd.user.pojo.ARole">
+  		update skd_role
+  		<set>
+  			name= #{name } content= #{content } status= #{status } create_time= #{create_time } update_time = #{update_time }
+  		</set>
+  		<where>
+  			id = #{id}
+  		</where>
+  	</update>
+  	<!--更新多条记录  -->
+  	<update id="updateList" parameterType="map"></update>
+  	<!--删除一条记录  没有返回 -->
+  	<delete id="delete" parameterType="map">
+  		delete from skd_role
+  		<where>
+  			<choose>
+  				<when test="id !=null">
+  					id = #{id}
+  				</when>
+  				<!-- 如果不写otherwise有可能删除所有的风险 当map不传的时候-->
+  				<otherwise>
+  					id = #{id}
+  				</otherwise>
+  			</choose>
+  		</where>
+  	</delete>
+  	
+  	<!--
+  		id: 必须和dao类名一样
+  		parameterType: 必须和dao方法参数类型一样
+  		resultType：必须和方法中的返回值一样（查询条件），查询多条必须和返回值（list）中的泛型一致
+  	  -->
+  	<select id="findOne" parameterType="map" resultType="com.skd.user.pojo.ARole">
+  		select * from skd_role
+  		<where>
+  			<choose>
+  				<when test="id !=null">
+  					id = #{id}
+  				</when>
+  			</choose>
+  		</where>
+  		<!-- 只查询一条 -->
+  		limit 1;
+  	</select>
+  	<!--查询多条记录  -->
+  	
+  	<select id="findList" parameterType="map" resultType="com.skd.user.pojo.ARole">
+  		select * from skd_role
+  		<!--条件搜索  -->
+  		<where>
+  			<!--关键字搜索  -->
+  			<if test="keyword !=null and keyword !=''">
+  				and (name like #{keyword} or content like #{keyword})
+  			</if>
+  			<!--状态  -->
+  			<if test="status !=null">
+  				and status = #{status}
+  			</if>
+  			<!--时间  -->
+  			<if test="stDtate !=null and enDtate !=null">
+  				<![CDATA[
+  					and create_time >= #{stDate} and create_time < #{enDtate}
+  				]]>
+  			</if>
+  		</where>
+  		<!--排序 如果没有排序按照默认排序  -->
+  		<choose>
+  			<when test="orderby == 'creatTimeASC'">
+  				order by creatTime asc
+  			</when>
+  			<otherwise>
+  				order by update_time desc
+  			</otherwise>
+  		</choose>
+  		
+  	</select>
+  
+  </mapper>
