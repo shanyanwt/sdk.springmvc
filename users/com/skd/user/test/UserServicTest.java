@@ -19,6 +19,7 @@ import com.skd.user.sercie.IuserService;
 
 /**
  * 6 用户service测试类
+ *
  * @author HEII
  *
  */
@@ -86,7 +87,7 @@ public class UserServicTest extends util {
 	}
 
 	/**
-	 * 查询一条管理员
+	 * 修改一条管理员
 	 */
 	@Test
 	public void updateOneAimsService() {
@@ -143,6 +144,7 @@ public class UserServicTest extends util {
 		ContstatFinaUtil.LOGGER.info("分页信息：" + pageUtil);
 	}
 
+	/* ==============角色开始======================= */
 	/**
 	 * 查询一条管角色
 	 */
@@ -152,6 +154,71 @@ public class UserServicTest extends util {
 		condMap.put("id", "1");
 		ARole role = userService.findOneARoleService(condMap);
 		ContstatFinaUtil.LOGGER.info("查询结果：" + role.toString());
+	}
+
+	@Test
+	public void saveOneARoleService() {
+		ARole role = new ARole();
+		role.setName("小二_");
+		role.setStatus(1);
+		role.setContent("新华社时刻更新_");
+		role.setCreate_time(new Date());
+		role.setUpdate_time(new Date());
+		JSONObject result = userService.saveOneARoleService(role);
+		ContstatFinaUtil.LOGGER.info(result);
+	}
+
+	/**
+	 * 修改一条角色
+	 */
+	@Test
+	public void updateOneARoleService() {
+		Map<String, Object> condMap = new HashMap<String, Object>();
+		condMap.put("id", "5");
+		ARole role = userService.findOneARoleService(condMap);
+		ContstatFinaUtil.LOGGER.info("更新之前：" + role.toString());
+
+		role.setName("xinliang");
+		role.setUpdate_time(new Date());
+		JSONObject resultJson = userService.updateOneARoleService(role);
+
+		ContstatFinaUtil.LOGGER.info("更新之后：" + resultJson.toString());
+	}
+
+	/**
+	 * 删除一条记录
+	 */
+	@Test
+	public void deleteOneARoleService() {
+		Map<String, Object> condMap = new HashMap<String, Object>();
+		condMap.put("id", "2");
+		JSONObject adims = userService.deleteOneARoleService(condMap);
+		ContstatFinaUtil.LOGGER.info("查询结果：" + adims.toString());
+	}
+
+	@Test
+	public void findARoleListService() {
+		// 搜索功能
+		Map<String, Object> condMap = new HashMap<String, Object>();
+		condMap.put("keyword", "小二");
+		/*
+		 * condMap.put("status", "1"); condMap.put("seDtate", new Date());
+		 * condMap.put("edDtate", new Date());
+		 */
+
+		// 查询所有 不分页 传null
+		/* List<AAdims> adims = userService.findListService(null); */
+
+		PageUtil pageUtil = new PageUtil();
+		// pageUtil.setCurrentPage(1);
+		// pageUtil.setPageSize(20);
+		List<ARole> role = userService.findARoleListService(pageUtil, condMap);
+		int conte = 0;
+		for (ARole roles : role) {
+			ContstatFinaUtil.LOGGER.info("查询结果：" + conte + roles.toString());
+			conte++;
+		}
+		ContstatFinaUtil.LOGGER.info("分页信息：" + pageUtil);
 	}
 
 }

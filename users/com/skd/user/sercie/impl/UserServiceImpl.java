@@ -21,6 +21,7 @@ import com.skd.user.sercie.IuserService;
 
 /**
  * 5 用户service的实现类
+ *
  * @author HEII
  *
  */
@@ -40,8 +41,7 @@ public class UserServiceImpl implements IuserService {
 		int res = this.adimsDao.save(adims);
 		if(res >0){
 			/**
-			 * jsoNObiect对象{}  .put 使用方式
-			 * JSONArray[]  .add
+			 * jsoNObiect对象{} .put 使用方式 JSONArray[] .add
 			 * {"code":"1000","data":{"effect":1,"id":6},"info":"成功"}
 			 */
 
@@ -49,8 +49,7 @@ public class UserServiceImpl implements IuserService {
 			result.put("info", "成功");
 			JSONObject dataJson = new JSONObject();
 			/**
-			 * id
-			 * 条数
+			 * id 条数
 			 */
 			dataJson.put("id", adims.getId());
 			dataJson.put("effect", res);
@@ -65,7 +64,7 @@ public class UserServiceImpl implements IuserService {
 			dataJson.put("items", jsonArray);
 			result.put("data", dataJson);
 
-			//json解析  获取json信息  返回的数据是什么就用什么接收   Object || Array
+			// json解析 获取json信息 返回的数据是什么就用什么接收 Object || Array
 			String jsonStr = result.toJSONString();
 			JSONObject resultJs = (JSONObject) JSON.parse(jsonStr);
 			String itemCode = resultJs.getString("code");
@@ -76,7 +75,7 @@ public class UserServiceImpl implements IuserService {
 
 			String itemId = itemData.getString("id");
 			System.out.println("======itemId=="+itemId);
-			//获取list
+			// 获取list
 			JSONArray qitem = (JSONArray) itemData.get("items");
 
 			for (Object i : qitem) {
@@ -173,40 +172,7 @@ public class UserServiceImpl implements IuserService {
 			result.put("code", "1000");
 			result.put("info", "成功");
 			JSONObject dataJson = new JSONObject();
-			/**
-			 * id 条数
-			 */
-			dataJson.put("id", role.getId());
-			dataJson.put("effect", res);
-
-			JSONArray jsonArray = new JSONArray();
-
-			JSONObject items = new JSONObject();
-			jsonArray.add(items);
-			dataJson.put("items", jsonArray);
-			result.put("data", dataJson);
-
-			// json解析 获取json信息 返回的数据是什么就用什么接收 Object || Array
-			String jsonStr = result.toJSONString();
-			JSONObject resultJs = (JSONObject) JSON.parse(jsonStr);
-			String itemCode = resultJs.getString("code");
-			String itemInfo = resultJs.get("info") + "";
-			System.out.println("======code==" + itemCode + ";info" + itemInfo);
-			// 获取对象
-			JSONObject itemData = (JSONObject) resultJs.get("data");
-
-			String itemId = itemData.getString("id");
-			System.out.println("======itemId==" + itemId);
-			// 获取list
-			JSONArray qitem = (JSONArray) itemData.get("items");
-
-			for (Object i : qitem) {
-				JSONObject iQ = (JSONObject) i;
-				String email = iQ.getString("email");
-				System.out.println("======itemsEmail==" + email);
-			}
-			// 打印pojo的tostring
-			// System.out.println(role);
+			result.put("data", role.toString());
 
 		} else {
 			result.put("code", "500");

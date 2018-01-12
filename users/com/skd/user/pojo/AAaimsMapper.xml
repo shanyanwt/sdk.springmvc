@@ -14,6 +14,7 @@
   	</insert>
   	<!--更新一条记录 
   		也可以更新全部字段，也可更新指定字段
+  		id 是dao的方法名
   	-->
   	<update id="update" parameterType="com.skd.user.pojo.AAdims">
   		update skd_admin

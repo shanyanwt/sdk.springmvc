@@ -12,7 +12,7 @@ public class ARole {
 	private int id;
 	private String name;
 	private String content;
-	private byte status;
+	private int status;
 	private Date create_time;
 	private Date update_time;
 
@@ -64,7 +64,7 @@ public class ARole {
 	/**
 	 * @return the status
 	 */
-	public byte getStatus() {
+	public int getStatus() {
 		return status;
 	}
 
@@ -72,7 +72,7 @@ public class ARole {
 	 * @param status
 	 *            the status to set
 	 */
-	public void setStatus(byte status) {
+	public void setStatus(int status) {
 		this.status = status;
 	}
 
@@ -108,7 +108,7 @@ public class ARole {
 
 	/*
 	 * (non-Javadoc)
-	 * 
+	 *
 	 * @see java.lang.Object#toString()
 	 */
 	@Override

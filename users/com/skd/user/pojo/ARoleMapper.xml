@@ -3,22 +3,34 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <!--3 活动的Dao实现类满足四个条件  -->
-  <mapper namespace="com.skd.user.dao.IAdimsDao">
+  <mapper namespace="com.skd.user.dao.IRoleDao">
   	<!--保存一条数据  自动赋值id  -->
   	<insert id="save" parameterType="com.skd.user.pojo.ARole"
   	useGeneratedKeys="true"  keyProperty="id" keyColumn="id">
-	insert into skd_role 
-		(name, content, status, create_time, update_time) 
-	values 
-		({name} # { content} # { status} # { create_time} # { update_time})
+		insert into skd_role (name, content, status, create_time, update_time) 
+		values
+		(#{name},#{content},#{status},#{create_time},#{update_time})
   	</insert>
   	<!--更新一条记录 
   		也可以更新全部字段，也可更新指定字段
+  		id 是dao的方法名
   	-->
   	<update id="update" parameterType="com.skd.user.pojo.ARole">
   		update skd_role
   		<set>
-  			name= #{name } content= #{content } status= #{status } create_time= #{create_time } update_time = #{update_time }
+  			<if test="name !=null">
+  				name= #{name},
+  			</if>
+  			<if test="content !=null">
+  				content= #{content},
+  			</if>
+  			<if test="create_time !=null">
+  				create_time= #{create_time},
+  			</if>
+  			<if test="update_time !=null">
+  				 update_time = #{update_time},
+  			</if>
+  			 status= #{status}
   		</set>
   		<where>
   			id = #{id}

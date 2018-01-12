@@ -9,10 +9,7 @@ import com.skd.user.pojo.AAdims;
 import com.skd.user.pojo.ARole;
 
 /**
- * 4 用户service
- * 一个Dao  对应  一张表
- * 一个Service持有多个dao的引用
- * 一个controller持有多个service
+ * 4 用户service 一个Dao 对应 一张表 一个Service持有多个dao的引用 一个controller持有多个service
  *
  * @author HEII
  *
@@ -23,6 +20,7 @@ public interface IuserService {
 
 	/**
 	 * 保存一条管理员
+	 * 
 	 * @param adims
 	 * @return json
 	 *
@@ -59,6 +57,7 @@ public interface IuserService {
 	 * @return
 	 */
 	List<AAdims> findListService(PageUtil pageUtil, Map<String, Object> condMap);
+
 	/* 管理员 service结束 */
 
 	/* =======角色 service开始========== */
