@@ -81,9 +81,12 @@ public class UserServicTest extends util {
 	@Test
 	public void findOneAdimsService() {
 		Map<String, Object> condMap = new HashMap<String, Object>();
-		condMap.put("id", "5");
+		condMap.put("id", "2");
 		AAdims adims = userService.findOneAdimsService(condMap);
 		ContstatFinaUtil.LOGGER.info("查询结果：" + adims.toString());
+		// 查询角色
+		ARole role = adims.getRole();
+		ContstatFinaUtil.LOGGER.info("角色信息==" + role);
 	}
 
 	/**
@@ -154,6 +157,11 @@ public class UserServicTest extends util {
 		condMap.put("id", "1");
 		ARole role = userService.findOneARoleService(condMap);
 		ContstatFinaUtil.LOGGER.info("查询结果：" + role.toString());
+		/* 查询管理员集合 */
+		List<AAdims> aAdims = role.getAdimsList();
+		for (AAdims adimsList : aAdims) {
+			ContstatFinaUtil.LOGGER.info("管理员结果：" + adimsList);
+		}
 	}
 
 	@Test

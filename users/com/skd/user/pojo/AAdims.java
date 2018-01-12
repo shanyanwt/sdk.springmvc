@@ -9,20 +9,6 @@ import java.util.Date;
  */
 
 public class AAdims {
-
-	/*`id` int(11) NOT NULL AUTO_INCREMENT,
-	  `email` varchar(255) DEFAULT NULL COMMENT '邮箱',
-	  `password` varchar(255) DEFAULT NULL COMMENT '管理员密码',
-	  `name` varchar(255) NOT NULL COMMENT '姓名',
-	  `phone` varchar(255) DEFAULT NULL COMMENT '手机号',
-	  `qq` varchar(255) DEFAULT NULL,
-	  `sex` varchar(255) DEFAULT NULL COMMENT '性别：0男 1 女',
-	  `content` text NOT NULL,
-	  `status` tinyint(4) NOT NULL COMMENT '状态；0：启用，1：启用',
-	  `create_time` datetime NOT NULL COMMENT '创建时间',
-	  `update_time` datetime NOT NULL COMMENT '更新时间',
-	  `last_login_time` datetime DEFAULT NULL COMMENT '上次登录时间',*/
-
 	private int id;
 	private int role_id;
 	private String email;
@@ -36,6 +22,9 @@ public class AAdims {
 	private Date create_time;
 	private Date update_time;
 	private Date last_login_time;
+	/* =======关联表引用对象============= */
+	private ARole role;
+
 	public int getId() {
 		return id;
 	}
@@ -114,6 +103,22 @@ public class AAdims {
 	public void setLast_login_time(Date last_login_time) {
 		this.last_login_time = last_login_time;
 	}
+
+	/**
+	 * @return the role
+	 */
+	public ARole getRole() {
+		return role;
+	}
+
+	/**
+	 * @param role
+	 *            the role to set
+	 */
+	public void setRole(ARole role) {
+		this.role = role;
+	}
+
 	@Override
 	public String toString() {
 		return "AAdims [id=" + id + ", role_id=" + role_id + ", email=" + email
@@ -121,8 +126,8 @@ public class AAdims {
 				+ phone + ", qq=" + qq + ", sex=" + sex + ", content="
 				+ content + ", status=" + status + ", create_time="
 				+ create_time + ", update_time=" + update_time
-				+ ", last_login_time=" + last_login_time + "]";
+				+ ", last_login_time=" + last_login_time + ", role=" + role
+				+ "]";
 	}
-
 
 }

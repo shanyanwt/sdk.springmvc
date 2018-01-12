@@ -4,6 +4,17 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <!--3 活动的Dao实现类满足四个条件  -->
   <mapper namespace="com.skd.user.dao.IAdimsDao">
+  
+  <!--定义管理员的 resultMap为引用类型赋值  -->
+  <resultMap type="com.skd.user.pojo.AAdims" id="resultMap">
+	  <!-- 关联字段单独赋值 -->
+	  <result property="role_id" column="role_id" />
+	  
+	  <!--赋值 采用另外发送一条sql  关联的键 column="role_id" -->
+		<association property="role" column="role_id" javaType="com.skd.user.pojo.ARole"
+		select="com.skd.user.dao.IRoleDao.selectById"/>  
+  </resultMap>
+  
   	<!--保存一条数据  自动赋值id  -->
   	<insert id="save" parameterType="com.skd.user.pojo.AAdims"
   	useGeneratedKeys="true"  keyProperty="id" keyColumn="id">
@@ -83,7 +94,7 @@
   		parameterType: 必须和dao方法参数类型一样
   		resultType：必须和方法中的返回值一样（查询条件），查询多条必须和返回值（list）中的泛型一致
   	  -->
-  	<select id="findOne" parameterType="map" resultType="com.skd.user.pojo.AAdims">
+  	<select id="findOne" parameterType="map" resultMap="resultMap">
   		select * from skd_admin
   		<where>
   			<choose>
@@ -95,9 +106,16 @@
   		<!-- 只查询一条 -->
   		limit 1;
   	</select>
+  	
+  	<!-- 按照id赋值 -->  	
+	<select id="findListById" resultType="com.skd.user.pojo.AAdims">
+	<!-- 当parameterType="" 不传时候为基本类型  #{} 里可以随便写 -->
+		select * from skd_admin where role_id=#{aaaaaaa}
+	</select>
+  	
   	<!--查询多条记录  -->
   	
-  	<select id="findList" parameterType="map" resultType="com.skd.user.pojo.AAdims">
+  	<select id="findList" parameterType="map" resultMap="resultMap">
   		select * from skd_admin
   		<!--条件搜索  -->
   		<where>

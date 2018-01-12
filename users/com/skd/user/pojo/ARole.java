@@ -1,6 +1,7 @@
 package com.skd.user.pojo;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * 角色pojo
@@ -15,7 +16,9 @@ public class ARole {
 	private int status;
 	private Date create_time;
 	private Date update_time;
+	/* ======关联对象===== */
 
+	private List<AAdims> adimsList;
 	/**
 	 * @return the id
 	 */
@@ -106,16 +109,32 @@ public class ARole {
 		this.update_time = update_time;
 	}
 
+	/**
+	 * @return the adimsList
+	 */
+	public List<AAdims> getAdimsList() {
+		return adimsList;
+	}
+
+	/**
+	 * @param adimsList
+	 *            the adimsList to set
+	 */
+	public void setAdimsList(List<AAdims> adimsList) {
+		this.adimsList = adimsList;
+	}
+
 	/*
 	 * (non-Javadoc)
-	 *
+	 * 
 	 * @see java.lang.Object#toString()
 	 */
 	@Override
 	public String toString() {
 		return "ARole [id=" + id + ", name=" + name + ", content=" + content
 				+ ", status=" + status + ", create_time=" + create_time
-				+ ", update_time=" + update_time + "]";
+				+ ", update_time=" + update_time + ", adimsList=" + adimsList
+				+ "]";
 	}
 
 }

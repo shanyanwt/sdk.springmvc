@@ -4,6 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <!--3 活动的Dao实现类满足四个条件  -->
   <mapper namespace="com.skd.user.dao.IRoleDao">
+  <!--为自定义引用类型赋值  -->
+  <resultMap type="com.skd.user.pojo.ARole" id="resultMap" >
+  <!--引用类型是主键的时候要用id标签  -->
+  		<id property="id" column="id"/>
+	   
+	   <collection property="adimsList" column="id" ofType="com.skd.user.pojo.AAdims"
+	  select="com.skd.user.dao.IAdimsDao.findListById"/>
+  </resultMap>
+  
   	<!--保存一条数据  自动赋值id  -->
   	<insert id="save" parameterType="com.skd.user.pojo.ARole"
   	useGeneratedKeys="true"  keyProperty="id" keyColumn="id">
@@ -59,7 +68,7 @@
   		parameterType: 必须和dao方法参数类型一样
   		resultType：必须和方法中的返回值一样（查询条件），查询多条必须和返回值（list）中的泛型一致
   	  -->
-  	<select id="findOne" parameterType="map" resultType="com.skd.user.pojo.ARole">
+  	<select id="findOne" parameterType="map" resultMap="resultMap">
   		select * from skd_role
   		<where>
   			<choose>
@@ -71,8 +80,12 @@
   		<!-- 只查询一条 -->
   		limit 1;
   	</select>
-  	<!--查询多条记录  -->
+	<!-- 按照id赋值 -->  	
+	<select id="selectById" resultType="com.skd.user.pojo.ARole">
+		select * from skd_role where id=#{id}
+	</select>
   	
+  	<!--查询多条记录  -->
   	<select id="findList" parameterType="map" resultType="com.skd.user.pojo.ARole">
   		select * from skd_role
   		<!--条件搜索  -->
