@@ -1,10 +1,13 @@
 package com.sdk.test;
 
+import java.util.UUID;
+
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.junit.Test;
 
 import com.sdk.util.EncreyptUtil;
+import com.sdk.util.RegexUtil;
 
 /**
  * 测试常用的加密算法
@@ -75,14 +78,27 @@ public class EnCode {
 	@Test
 	public void encreyptUtil() {
 
-		String souStr = "121";
+		String souStr = "yan";
 		EncreyptUtil encreyq = new EncreyptUtil();
 		String enStr = encreyq.encodStr(souStr);
 		System.out.println(enStr);
 		// 明文和加密比对
 
-		boolean res = encreyq.chcekStr("212", enStr);
+		boolean res = encreyq.chcekStr(souStr, enStr);
 		System.out.println(res);
 
+	}
+
+	@Test
+	public void randomUUID() {
+		// 3、时间戳和随机字符串
+		String noncestr = UUID.randomUUID().toString().replace("-", "")
+				.substring(0, 16);// 随机字符串
+		String timestamp = String.valueOf(System.currentTimeMillis() / 1000);// 时间戳
+		System.out.println(noncestr + "=======" + timestamp);
+
+		RegexUtil random = new RegexUtil();
+		String aString = random.randomStr(10);
+		System.out.println(aString);
 	}
 }

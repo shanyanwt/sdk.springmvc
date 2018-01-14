@@ -11,7 +11,9 @@ import org.apache.logging.log4j.Logger;
  */
 
 public class ContstatFinaUtil {
-	
+
 	public static final  Logger LOGGER = LogManager.getLogger();
-	
+	// 全部字符
+	public static final String ALL_STRING = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+
 }

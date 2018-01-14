@@ -11,14 +11,19 @@ import org.apache.commons.codec.digest.DigestUtils;
 public class EncreyptUtil {
 
 	/**
-	 * sha256加密
+	 * sha256加密 加密算法=$da32$+'yanjaing' sb.substring(0, 8);
 	 *
 	 * @param souStr
 	 * @return
 	 */
 	public String encodStr(String souStr) {
-		return DigestUtils.sha256Hex(souStr);
-
+		String split = "$";
+		RegexUtil randomUtil = new RegexUtil();
+		String random = randomUtil.randomStr(8);
+		// 固定随机字符
+		String fixed = split + random + split;
+		String pass = DigestUtils.sha256Hex(fixed + souStr);
+		return fixed + pass;
 	}
 
 	/**
@@ -28,7 +33,18 @@ public class EncreyptUtil {
 	 * @return boolen
 	 */
 	public boolean chcekStr(String souStr, String encodeStr) {
-		return DigestUtils.sha256Hex(souStr).equalsIgnoreCase(encodeStr);
+
+		String split = "$";
+		String[] random = encodeStr.split("\\" + split);
+		if (random.length == 3) {
+			// 固定随机字符
+			String fixed = split + random[1] + split;
+			String pass = DigestUtils.sha256Hex(fixed + souStr);
+			// 最终加密之后的
+			String finalStr = fixed + pass;
+			return finalStr.equalsIgnoreCase(encodeStr);
+		}
+		return false;
 
 	}
 
