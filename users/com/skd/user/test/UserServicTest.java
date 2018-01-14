@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -12,6 +11,7 @@ import org.junit.Test;
 import com.alibaba.fastjson.JSONObject;
 import com.sdk.test.util;
 import com.sdk.util.ContstatFinaUtil;
+import com.sdk.util.EncreyptUtil;
 import com.sdk.util.PageUtil;
 import com.skd.user.pojo.AAdims;
 import com.skd.user.pojo.ARole;
@@ -33,46 +33,20 @@ public class UserServicTest extends util {
 	}
 	@Test
 	public void saveOneAimsService() {
+		EncreyptUtil encrey = new EncreyptUtil();
 		AAdims adims = new AAdims();
 		adims.setRole_id(1);
-		adims.setEmail("3232@.com");
-		adims.setName("张三");
-		adims.setContent("dad");
-		adims.setPassword("cdacd");
+		adims.setEmail("1172716898@.com");
+		adims.setName("江小二");
+		adims.setContent("时刻点新闻晚报");
+		adims.setPassword(encrey.encodStr("@yanjiang"));
 		adims.setPhone("3245");
 		adims.setQq("1234356");
-//		adims.setStatus((byte) 1);
-//		adims.setSex((byte) 1);
 		adims.setCreate_time(new Date());
 		adims.setLast_login_time(new Date());
 		adims.setUpdate_time(new Date());
 		JSONObject result =userService.saveOneAimsService(adims);
 		ContstatFinaUtil.LOGGER.info(result);
-	}
-
-	@Test
-	public void savedAimsService() {
-		AAdims adims = new AAdims();
-		for (int i = 0; i < 100; i++) {
-			adims.setRole_id(1);
-			adims.setEmail("3232@.com_" + i);
-			adims.setName("小美_" + i);
-			adims.setContent("dad_" + i);
-			adims.setPassword("cdacd_" + i);
-			adims.setPhone("3245_" + i);
-			adims.setQq("1234356_" + i);
-			adims.setCreate_time(new Date());
-			adims.setLast_login_time(new Date());
-			adims.setUpdate_time(new Date());
-			JSONObject result = userService.saveOneAimsService(adims);
-			int rand = new Random().nextInt(1000);
-			ContstatFinaUtil.LOGGER.info(result + "随机数" + rand);
-			try {
-				Thread.sleep(rand);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		}
 	}
 
 	/**
