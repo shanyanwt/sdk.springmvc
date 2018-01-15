@@ -3,6 +3,8 @@ package com.skd.user.sercie;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Service;
+
 import com.alibaba.fastjson.JSONObject;
 import com.sdk.util.PageUtil;
 import com.skd.user.pojo.AAdims;
@@ -14,13 +16,13 @@ import com.skd.user.pojo.ARole;
  * @author HEII
  *
  */
-
+@Service
 public interface IuserService {
 	/* 管理员 service开始 */
 
 	/**
 	 * 保存一条管理员
-	 * 
+	 *
 	 * @param adims
 	 * @return json
 	 *

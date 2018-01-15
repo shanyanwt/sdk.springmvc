@@ -93,8 +93,8 @@ public class EnCode {
 	public void randomUUID() {
 		// 3、时间戳和随机字符串
 		String noncestr = UUID.randomUUID().toString().replace("-", "")
-				.substring(0, 16);// 随机字符串
-		String timestamp = String.valueOf(System.currentTimeMillis() / 1000);// 时间戳
+				.substring(0, 16);
+		String timestamp = String.valueOf(System.currentTimeMillis() / 1000);
 		System.out.println(noncestr + "=======" + timestamp);
 
 		RegexUtil random = new RegexUtil();
