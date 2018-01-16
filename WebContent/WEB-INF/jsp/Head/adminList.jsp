@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<title>时刻点系统</title>
+<title>管理员列表</title>
 </head>
 <body>
 	<h1>首页</h1>
@@ -12,10 +12,18 @@
 	<table border="1" width="50%">
 		 	<tr>
 		 		<td>
+		 				操作
+		 		</td>
+		 		<td>
+		 			链接
+		 		</td>
+		 	</tr>
+		 	<tr>
+		 		<td>
 		 				管理员列表
 		 		</td>
 		 		<td>
-		 			<a href="${pageContext.request.contextPath}/adminList.mvc">url</a>
+		 			<a href="${pageContext.request.contextPath}/Head/adminList.mvc">url</a>
 		 		</td>
 		 	</tr>
 		 </table>

@@ -25,11 +25,11 @@
 			<!--驱动  -->
 			<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
 			<!-- url -->
-			<property name="url" value="jdbc:mysql://locdlhost:3306/db_skd"/>
+			<property name="url" value="jdbc:mysql://47.95.7.135/db_skd?useSSL=false"/>
 			<!-- 用户名user -->
 			<property name="username" value="root"/>
 			<!-- 密码 -->
-			<property name="password" value="123456"/>
+			<property name="password" value="yan@1234"/>
 		</bean> 
       		<!--spring &&Mybatis整合
 		告诉classpath:的路径，编译后的路径
@@ -55,9 +55,9 @@
 			  -->
 			<property name="basePackage" value="com.skd"/>
 		</bean>
-		
+		  <!--mvc相关配置 使用context扫描注解 -->
          <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-         	<!-- 前缀  -->
+         	<!-- 前缀 WebContent/WEB-INF/jsp  -->
          	<property name="prefix" value="/WEB-INF/jsp/"/>
          	<!-- 后缀  -->
          	<property name="suffix" value=".jsp"/>

@@ -3,7 +3,8 @@ package com.skd.user.test;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Before;
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,12 +24,8 @@ import com.skd.user.sercie.IuserService;
 @RestController
 public class ApiTest extends util {
 
+	@Resource
 	private IuserService userService;
-
-	@Before
-	public void initService() {
-		userService = (IuserService) ac.getBean("userService");
-	}
 
 	/**
 	 * @return
