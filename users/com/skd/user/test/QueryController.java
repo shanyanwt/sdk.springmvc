@@ -1,7 +1,5 @@
 package com.skd.user.test;
 
-import java.util.Date;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,17 +39,9 @@ public class QueryController {
 
 	@RequestMapping("/insertSubmit")
 	public String insertSubmi(AAdims users) {
-
-		users.setContent("大王大王");
-		users.setLast_login_time(new Date());
-		users.setQq("1172726898");
 		JSONObject result = (JSONObject) JSON.toJSON(users);
-		System.out.println("=====fastjson====" + result.toJSONString());
-
-		System.out.println("===Ausers ausers====" + "id:" + users.getId()
-				+ ";name:" + users.getName() + ";socre:" + users.getEmail()
-				+ "statr:" + users.getStatus());
-		return "/findOne";
+		System.out.println("=====返回结果====" + result.toJSONString());
+		return result.toString();
 
 	}
 
